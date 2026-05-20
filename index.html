@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carter — Product Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Spline+Sans+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16140f;
+    --paper: #f4f0e6;
+    --paper-2: #ece6d6;
+    --accent: #c5471f;
+    --accent-2: #2f5d50;
+    --muted: #6b6557;
+    --line: #d8d1bf;
+    --display: 'Fraunces', Georgia, serif;
+    --body: 'Inter Tight', sans-serif;
+    --mono: 'Spline Sans Mono', monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
+  .wrap { position: relative; z-index: 2; max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 28px; max-width: 1080px; margin: 0 auto;
+    backdrop-filter: blur(6px);
+    background: rgba(244,240,230,0.7);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .logo { font-family: var(--mono); font-weight: 600; font-size: 15px; letter-spacing: -0.02em; }
+  nav .logo span { color: var(--accent); }
+  nav .links { display: flex; gap: 26px; }
+  nav .links a {
+    font-family: var(--mono); font-size: 13px; text-decoration: none; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.04em; transition: color .2s;
+  }
+  nav .links a:hover { color: var(--accent); }
+  @media (max-width: 640px){ nav .links { display: none; } }
+
+  /* HERO */
+  header { padding: 90px 0 70px; position: relative; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 13px; text-transform: uppercase;
+    letter-spacing: 0.18em; color: var(--accent); margin-bottom: 26px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::before { content: ""; width: 38px; height: 1px; background: var(--accent); }
+  h1 {
+    font-family: var(--display); font-weight: 600; font-size: clamp(48px, 9vw, 104px);
+    line-height: 0.96; letter-spacing: -0.03em; margin-bottom: 30px;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .lede { font-size: clamp(18px, 2.4vw, 23px); max-width: 620px; color: var(--ink); line-height: 1.5; }
+  .lede strong { font-weight: 600; }
+  .meta-row {
+    display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px;
+    font-family: var(--mono); font-size: 13px; color: var(--muted);
+  }
+  .meta-row span {
+    border: 1px solid var(--line); padding: 7px 14px; border-radius: 999px;
+    background: var(--paper-2);
+  }
+
+  /* SECTION HEADERS */
+  .section { padding: 60px 0; border-top: 1px solid var(--line); }
+  .section-label {
+    font-family: var(--mono); font-size: 13px; text-transform: uppercase;
+    letter-spacing: 0.16em; color: var(--muted); margin-bottom: 8px;
+  }
+  .section-title { font-family: var(--display); font-size: clamp(28px, 4vw, 40px); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 36px; }
+
+  /* PROJECTS */
+  .project {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 40px;
+    padding: 42px 0; border-bottom: 1px solid var(--line);
+  }
+  .project:last-child { border-bottom: none; }
+  @media (max-width: 740px){ .project { grid-template-columns: 1fr; gap: 18px; } }
+  .project .idx { font-family: var(--mono); color: var(--accent); font-size: 14px; }
+  .project h3 { font-family: var(--display); font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin: 8px 0 14px; line-height: 1.1; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tag { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent-2); border: 1px solid var(--accent-2); padding: 4px 10px; border-radius: 4px; opacity: .85; }
+  .motivation {
+    font-family: var(--display); font-style: italic; font-size: 18px; line-height: 1.5;
+    color: var(--accent-2); border-left: 3px solid var(--accent); padding: 4px 0 4px 18px;
+    margin-bottom: 24px;
+  }
+  .credit { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 16px; line-height: 1.5; }
+  .pm-block { margin-bottom: 18px; }
+  .pm-block .k { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 5px; }
+  .pm-block .v { font-size: 16px; line-height: 1.55; }
+  .project-links { margin-top: 22px; display: flex; gap: 18px; }
+  .project-links a { font-family: var(--mono); font-size: 13px; color: var(--ink); text-decoration: none; border-bottom: 1.5px solid var(--accent); padding-bottom: 2px; transition: opacity .2s; }
+  .project-links a:hover { opacity: .6; }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 50px; }
+  @media (max-width: 740px){ .about-grid { grid-template-columns: 1fr; gap: 26px; } }
+  .about-grid p { margin-bottom: 18px; }
+  .skills-card { background: var(--paper-2); border: 1px solid var(--line); border-radius: 10px; padding: 26px; }
+  .skills-card h4 { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 14px; }
+  .skills-card ul { list-style: none; }
+  .skills-card li { padding: 7px 0; border-bottom: 1px dashed var(--line); font-size: 15px; }
+  .skills-card li:last-child { border-bottom: none; }
+
+  /* CONTACT */
+  .contact { text-align: center; padding: 80px 0 60px; border-top: 1px solid var(--line); }
+  .contact h2 { font-family: var(--display); font-size: clamp(34px, 6vw, 64px); font-weight: 500; letter-spacing: -0.03em; margin-bottom: 24px; line-height: 1; }
+  .contact h2 em { font-style: italic; color: var(--accent); }
+  .contact-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .btn { font-family: var(--mono); font-size: 14px; text-decoration: none; color: var(--paper); background: var(--ink); padding: 13px 26px; border-radius: 999px; transition: transform .2s, background .2s; }
+  .btn:hover { transform: translateY(-2px); background: var(--accent); }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+  .btn.ghost:hover { background: var(--ink); color: var(--paper); }
+  footer { text-align: center; font-family: var(--mono); font-size: 12px; color: var(--muted); padding: 30px 0 50px; }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">carter<span>.</span>pm</div>
+  <div class="links">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Aspiring Product Manager</div>
+    <h1>I turn messy<br>problems into<br><em>shipped things.</em></h1>
+    <p class="lede">CS &amp; finance student who builds. I like the part where you figure out <strong>what's actually worth building</strong> — then go build it. Below are a few projects where I did exactly that.</p>
+    <div class="meta-row">
+      <span>↳ Building since college</span>
+      <span>CS + Finance</span>
+      <span>Incoming @ Google '26</span>
+    </div>
+  </header>
+
+  <section class="section" id="work">
+    <div class="section-label">Selected Work</div>
+    <h2 class="section-title">Two projects, told as decisions.</h2>
+
+    <!-- PROJECT 1 — WallStreetWizard -->
+    <div class="project reveal">
+      <div>
+        <div class="idx">01 / Product</div>
+        <h3>WallStreetWizard</h3>
+        <div class="tag-row">
+          <span class="tag">Streamlit</span>
+          <span class="tag">DeepSeek AI</span>
+          <span class="tag">Supabase</span>
+          <span class="tag">scikit-learn</span>
+        </div>
+      </div>
+      <div>
+        <p class="motivation">"As someone who recently started investing seriously, I kept hitting the same wall — the tools built to evaluate stocks assume you already speak the language. So I took a Python project from one of my courses and rebuilt it into the beginner-friendly tool I wished existed."</p>
+        <div class="pm-block">
+          <div class="k">Problem</div>
+          <div class="v">New investors want to evaluate options and build toward long-term growth, but existing tools are built for power users — dense dashboards and jargon that turn "let me research this stock" into a chore.</div>
+        </div>
+        <div class="pm-block">
+          <div class="k">Decisions</div>
+          <div class="v">Designed three focused flows instead of one overwhelming dashboard: <em>Research Stocks</em> (a plain-English query returns five stocks with charts, stats, and AI opinions drawn from recent news), <em>Stock Analysis</em> (resolves a company to a ticker, then computes stats, a scikit-learn price prediction, a head-to-head comparison chart, and an AI deep dive), and a <em>What-If Simulator</em> (shows what an investment would be worth today, benchmarked against the S&amp;P 500, with AI commentary). Offered two AI model tiers — fast for quick queries, stronger for deep analysis — to balance cost against quality, and had each user supply their own API key so the app stays free to host and scales without absorbing usage costs.</div>
+        </div>
+        <div class="pm-block">
+          <div class="k">Outcome</div>
+          <div class="v">A live, multi-user web app with real authentication, AI-driven research, ML price predictions, and S&amp;P 500-benchmarked simulation — shipped end to end and deployed publicly, born from a problem I had myself.</div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/sayarC/WallStreetWizard">View on GitHub →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 — Observing AI in S&P 500 -->
+    <div class="project reveal">
+      <div>
+        <div class="idx">02 / Research &amp; Analysis</div>
+        <h3>Observing AI in the S&amp;P 500</h3>
+        <div class="tag-row">
+          <span class="tag">Python</span>
+          <span class="tag">pdfplumber</span>
+          <span class="tag">statsmodels</span>
+          <span class="tag">Panel Regression</span>
+        </div>
+        <p class="credit">Group project · with Doga Gucuoglu &amp; Aishna Gupta<br>DSO 459: Business Analytics with Python</p>
+      </div>
+      <div>
+        <div class="pm-block">
+          <div class="k">Problem</div>
+          <div class="v">Since ChatGPT launched, S&amp;P 500 companies have flooded earnings calls with AI talk — a ~488% jump in mentions. But is that genuine productivity transformation, or just signaling to investors? We set out to test whether companies talking about AI actually got more productive, measured by Revenue Per Employee.</div>
+        </div>
+        <div class="pm-block">
+          <div class="k">Decisions</div>
+          <div class="v">Built a pipeline to turn 376 raw earnings-call PDFs into structured data — extracting text with pdfplumber, stripping boilerplate, and scoring each transcript against a 13-term AI keyword dictionary — then merged it with Compustat financials into a 250-observation panel. Ran nine progressively stricter regression models rather than trusting a single result, each designed to rule out a flaw in the last.</div>
+        </div>
+        <div class="pm-block">
+          <div class="k">Outcome</div>
+          <div class="v">The naive answer — "AI mentions predict higher productivity" — completely reversed once we controlled for company fixed effects, exposing that sector composition, not AI, drove the surface result. The deeper finding: companies pay a one-time productivity cost when they first commit to AI, and early movers saw ~9.5% higher productivity growth afterward. A reminder that the first answer the data gives you is often the wrong one.</div>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/sayarC/observing-ai-sp500">View project →</a>
+          <a href="https://drive.google.com/file/d/1hJ0LQqIlnaUCMXx1SfnmyPqtjTV8jGVo/view?usp=drive_link">See the deck →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-label">About</div>
+    <h2 class="section-title">Why product.</h2>
+    <div class="about-grid">
+      <div>
+        <p>I'm a CS and finance student who writes code but is most drawn to the questions <em>around</em> the code: what to build, for whom, and why it matters. Building things myself means I can talk to engineers without hand-waving and still keep the user and the business in frame.</p>
+        <p>The finance side gives me a vocabulary for tradeoffs — cost, return, opportunity cost, risk — that turns out to be exactly how good product decisions get made. The CS side means I respect what's actually hard to build.</p>
+        <p>This summer I'm interning at Google, where I'm excited to see product work at scale up close.</p>
+      </div>
+      <div class="skills-card">
+        <h4>Toolkit</h4>
+        <ul>
+          <li>Python · C++</li>
+          <li>Data pipelines &amp; scraping</li>
+          <li>Systems &amp; OOP design</li>
+          <li>Financial modeling (NPV, IRR)</li>
+          <li>Problem framing</li>
+          <li>Writing &amp; communication</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Let's build<br>something <em>worth it.</em></h2>
+    <div class="contact-links">
+      <a class="btn" href="mailto:you@email.com">Email me</a>
+      <a class="btn ghost" href="https://github.com/yourusername">GitHub</a>
+      <a class="btn ghost" href="https://linkedin.com/in/yourusername">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    Built from scratch · Hosted free on GitHub Pages · © 2026
+  </footer>
+
+</div>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
